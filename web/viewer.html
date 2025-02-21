@@ -28,6 +28,8 @@
 
       <script src="js/display.js"></script>
       <script src="js/sketchPad.js"></script>
+      <script src="js/dataCleaner.js"></script>
+
 
       <script src="./chart/graphics.js"></script>
       <script src="./chart/math.js"></script>
@@ -40,8 +42,9 @@
 
          // Classifying the testing samples
          const kNN = new KNN(trainingSamples);
-         let correctCount = 0;
+         let correctCount = 0;   
          let totalCount = 0;
+         
          for (const testSample of testingSamples) {
             testSample.truth = testSample.label;
             testSample.label = "?";
@@ -66,6 +69,7 @@
          for (let student_id in trainingGroups) {
             const samples = trainingGroups[student_id];
             const studentName = samples[0].student_name;
+            
             createRow(container, studentName, samples);
          }
 

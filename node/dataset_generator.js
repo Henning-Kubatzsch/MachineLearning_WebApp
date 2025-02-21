@@ -8,6 +8,8 @@ const ctx = canvas.getContext("2d");
 
 const fs = require("fs");
 
+console.log("we are in");
+
 // This section helps to install the package
 if (fs.existsSync(constants.DATASET_DIR)) {
    fs.readdirSync(constants.DATASET_DIR).forEach((fileName) =>
