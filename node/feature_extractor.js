@@ -13,7 +13,9 @@ for (const sample of samples) {
       fs.readFileSync(constants.JSON_DIR + "/" + sample.id + ".json")
    );
    const functions = featureFunctions.inUse.map((f) => f.function);
+   //console.log(functions);
    sample.point = functions.map((f) => f(paths));
+   //console.log(sample.point);
 }
 
 const featureNames = featureFunctions.inUse.map((f) => f.name);
@@ -24,6 +26,7 @@ const trainingAmount = samples.length * 0.5;
 
 const training = [];
 const testing = [];
+
 for (let i = 0; i < samples.length; i++) {
    if (i < trainingAmount) {
       training.push(samples[i]);

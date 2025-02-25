@@ -18,7 +18,7 @@ class KNN {
       }
       const max = Math.max(...Object.values(counts));
       const label = labels.find((l) => counts[l] == max);
-      return { label, nearestSamples };
+      return {label, nearestSamples};
    }
 }
 

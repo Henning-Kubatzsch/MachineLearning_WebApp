@@ -78,3 +78,13 @@ function toggleInput() {
       chart.hideDynamicPoint();
    }
 }
+
+function toggleOutput() {
+   if (confusionContainer.style.display == "none") {
+      confusionContainer.style.display = "block";
+      sketchPad.triggerUpdate();
+   } else {
+      confusionContainer.style.display = "none";
+      chart.hideDynamicPoint();
+   }
+}

@@ -11,7 +11,7 @@ const geometry = require("../common/geometry.js");
 
 //console.log("we are in");
 
-// This section helps to install the package
+// This section helps to install the package (just deletes and creates again the data directory)
 if (fs.existsSync(constants.DATASET_DIR)) {
    fs.readdirSync(constants.DATASET_DIR).forEach((fileName) =>
       fs.rmSync(constants.DATASET_DIR + "/" + fileName, { recursive: true })
@@ -40,8 +40,7 @@ fileNames.forEach((fn) => {
             label,
             student_name: student,
             student_id: session,
-         });
-   
+         });   
          const paths = drawings[label];
          fs.writeFileSync(
             constants.JSON_DIR + "/" + id + ".json",
@@ -49,12 +48,11 @@ fileNames.forEach((fn) => {
          );   
          generateImageFile(constants.IMG_DIR + "/" + id + ".png", paths);
       }
-      
-
       utils.printProgress(id, fileNames.length * 8);
       id++;
    }
 });
+
 console.log("\n");
 
 fs.writeFileSync(constants.SAMPLES, JSON.stringify(samples));

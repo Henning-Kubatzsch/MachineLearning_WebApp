@@ -52,6 +52,7 @@
             }
             data.student = student.value;
             student.style.display = "none";
+            //student.style.display = "initial";
             sketchPadContainer.style.visibility = "visible";
             const label = classes[index];
             instructions.innerHTML = "Please draw a " + label;
@@ -86,10 +87,13 @@
             instructions.innerHTML =
                "Take your downloaded file and place it alongside the others in the dataset!";
 
+            // a: HTML link elelement
             const element = document.createElement("a");
             element.setAttribute(
+               // href sets link to a data URL of a JSON file
                "href",
                "data:application/json;charset=utf-8," +
+                  // encodes js object to JSON object
                   encodeURIComponent(JSON.stringify(data))
             );
 
