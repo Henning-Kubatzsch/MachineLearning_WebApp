@@ -1,7 +1,19 @@
+//const utils = require("./utils");
 
 if(typeof geometry === "undefined"){
    geometry = require("./geometry");
 }
+
+
+if(typeof draw === "undefined"){
+   draw = require("./draw");
+}
+
+if(typeof utils === "undefined"){
+   utils = require("./utils");
+}
+
+
 
 const featureFunctions = {};
 
@@ -37,12 +49,94 @@ featureFunctions.getElongation = (paths) => {
           ( Math.min(width, height) + 1);
 };
 
+featureFunctions.getRoundness = (paths) => {
+   const points = paths.flat();
+   const { hull } = geometry.minimumBoundingBox({ points });
+   return geometry.roundness(hull);
+};
+
+featureFunctions.getPixels = (paths, size = 400, expand = true) => {
+   let canvas = null;
+   try{
+      // for web
+      canvas = document.createElement("canvas");
+      canvas.width = size;
+      canvas.heigth = size;
+   }catch (err){
+      // for node
+      const { createCanvas } = require("../node/node_modules/canvas");
+      canvas = createCanvas(size, size);
+   }
+   const ctx = canvas.getContext("2d");
+   
+   if(expand){
+      //console.log("we are in expand");
+      const points = paths.flat();
+      const bounds = {
+         left: Math.min(...points.map((p) => p[0])),
+         right: Math.max(...points.map((p) => p[0])),
+         top: Math.min(...points.map((p) => p[1])),
+         bottom: Math.max(...points.map((p) => p[1]))
+      };
+
+      const newPaths = [];
+      for(const path of paths){
+         const newPoints = path.map(p =>
+            [
+               utils.invLerp(bounds.left, bounds.right, p[0]) * size,
+               utils.invLerp(bounds.top, bounds.bottom, p[1]) * size
+            ]
+         );
+         newPaths.push(newPoints);
+      }
+      draw.paths(ctx, newPaths);
+   }else{
+      draw.paths(ctx, paths);
+   }
+   
+  /*
+   if (expand) {
+      const points = paths.flat();
+
+      const bounds = {
+         left: Math.min(...points.map((p) => p[0])),
+         right: Math.max(...points.map((p) => p[0])),
+         top: Math.min(...points.map((p) => p[1])),
+         bottom: Math.max(...points.map((p) => p[1]))
+      };
+
+      const newPaths = [];
+      for (const path of paths) {
+         const newPoints = path.map(p => 
+            [
+               utils.invLerp(bounds.left, bounds.right, p[0]) * size,
+               utils.invLerp(bounds.top, bounds.bottom, p[1]) * size
+            ]
+         );
+         newPaths.push(newPoints);
+      }
+      draw.paths(ctx, newPaths);
+   } else {
+      draw.paths(ctx, paths);
+   }*/
+
+   const imgData = ctx.getImageData(0, 0, size, size);
+   return imgData.data.filter((val, index) => index %4 == 3);
+}
+
+featureFunctions.getComplexity = (paths) =>{
+   const pixels = featureFunctions.getPixels(paths);
+   return pixels.filter((a) => a != 0).length;
+};
+
 featureFunctions.inUse = [
    //{name:"Path Count",function:featureFunctions.getPathCount},
    //{name:"Point Count",function:featureFunctions.getPointCount},
    { name: "Width", function: featureFunctions.getWidth },
    { name: "Height", function: featureFunctions.getHeight },
    { name: "Elongation", function: featureFunctions.getElongation },
+   { name: "Roundness", function: featureFunctions.getRoundness},
+   { name: "GetComplexity", function: featureFunctions.getComplexity}
 ];
 
 if (typeof module !== "undefined") {
