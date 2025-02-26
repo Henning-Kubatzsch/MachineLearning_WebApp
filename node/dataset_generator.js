@@ -65,11 +65,12 @@ fs.writeFileSync(
 function generateImageFile(outFile, paths) {
    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-   draw.paths(ctx, paths);
+   //draw.paths(ctx, paths);
 
    const pixels = featureFunctions.getPixels(paths);
    const size = Math.sqrt(pixels.length);
    const imgData = ctx.getImageData(0, 0, size, size);
+
    for(let i = 0; i < pixels.length; i++){
       const alpha = pixels[i];
       const startIndex = i * 4;
@@ -83,6 +84,7 @@ function generateImageFile(outFile, paths) {
       imgData.data[startIndex + 3] = alpha;
    }
 
+   // don't draw but put image data \\//
    ctx.putImageData(imgData, 0, 0);
 
    // following is for debugging pixel count

@@ -61,6 +61,7 @@
          let correctCount = 0;   
          let totalCount = 0;
          
+         // presiction for selected testSamples
          for (const testSample of testingSamples) {
             testSample.truth = testSample.label;
             testSample.label = "?";
@@ -71,6 +72,8 @@
             totalCount++;
             correctCount += testSample.correct ? 1 : 0;
          }
+
+         // check performance of Model
          statistics.innerHTML =
             "<b>ACCURACY</b><br>" +
             correctCount +
@@ -99,7 +102,7 @@
             createRow(container, studentName, samples);
          }
 
-         // Initializing the Chart
+         // Initializing the interactive Chart
          const options = {
             size: 500,
             axesLabels: featureNames,
@@ -114,10 +117,10 @@
 
          const chart = new Chart(
             chartContainer,
-            //trainingSamples,
-            testingSamples.filter(
-               (s) => (s.truth == "pencil" && s.label != "pencil")
-            ),
+            trainingSamples,
+            //testingSamples.filter(
+            //   (s) => (s.truth == "pencil" && s.label != "pencil")
+            //),
             //testingSamples.filter(
             //   (a) => (a.truth == "pencil")
             //),
@@ -140,6 +143,7 @@
 
          function onDrawingUpdate(paths) {         
             const functions = featureFunctions.inUse.map((f) => f.function);
+            // deklare point withour var, const or let makes it a global variable
             point = functions.map((f) => f(paths));
             utils.normalizePoints([point], minMax);
             const { label, nearestSamples } = kNN.predict(point);
