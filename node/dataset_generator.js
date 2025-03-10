@@ -94,7 +94,7 @@ function generateImageFile(outFile, paths) {
    */
 
    // following code is generating bounding box when using the vertecies line and the hull when using the hull line
-   /*
+   
    const{vertices, hull} = geometry.minimumBoundingBox({
       points: paths.flat()
    });
@@ -108,7 +108,7 @@ function generateImageFile(outFile, paths) {
 
    //draw.path(ctx, [...vertices, vertices[0]], "red");
    draw.path(ctx, [...hull, hull[0]], color);
-   */
+   
 
 
    const buffer = canvas.toBuffer("image/png");

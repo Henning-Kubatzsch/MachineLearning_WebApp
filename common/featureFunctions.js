@@ -67,8 +67,8 @@ featureFunctions.getPixels = (paths, size = 400, expand = true) => {
    }
    const ctx = canvas.getContext("2d");
    
+   // if expand == true: imgs get expanded to fill the whole canvas in givin borders
    if(expand){
-      //console.log("we are in expand");
       const points = paths.flat();
       const bounds = {
          left: Math.min(...points.map((p) => p[0])),
@@ -92,6 +92,7 @@ featureFunctions.getPixels = (paths, size = 400, expand = true) => {
       draw.paths(ctx, paths);
    }   
    const imgData = ctx.getImageData(0, 0, size, size);
+   // here i return every 4th pixel
    return imgData.data.filter((val, index) => index %4 == 3);
 }
 

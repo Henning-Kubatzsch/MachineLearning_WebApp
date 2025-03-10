@@ -61,7 +61,7 @@
          let correctCount = 0;   
          let totalCount = 0;
          
-         // presiction for selected testSamples
+         // presiction for selected testSamplese
          for (const testSample of testingSamples) {
             testSample.truth = testSample.label;
             testSample.label = "?";
@@ -87,6 +87,8 @@
          const trainingGroups = utils.groupBy(trainingSamples, "student_id");
          for (let student_id in trainingGroups) {
             const samples = trainingGroups[student_id];
+            //const studentName = trainingGroups[student_id][0];   
+
             const studentName = samples[0].student_name;            
             createRow(container, studentName, samples);
          }
