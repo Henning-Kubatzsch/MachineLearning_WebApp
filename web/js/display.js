@@ -80,11 +80,18 @@ function toggleInput() {
 }
 
 function toggleOutput() {
-   if (confusionContainer.style.display == "none") {
-      confusionContainer.style.display = "block";
-      sketchPad.triggerUpdate();
-   } else {
-      confusionContainer.style.display = "none";
-      chart.hideDynamicPoint();
+   if(networkCanvas.style.display == ''){
+      networkCanvas.style.display = 'none';
+      confusionContainer.style.display = '';      
+      //console.log("case 1");
+   }
+   else if(confusionContainer.style.display == ''){
+      confusionContainer.style.display = 'none';
+      //console.log("case 2");
+   }
+   else{
+      confusionContainer.style.display = '';
+      networkCanvas.style.display = '';
+      //console.log("case 3");
    }
 }

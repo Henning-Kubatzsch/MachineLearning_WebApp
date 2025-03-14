@@ -97,15 +97,12 @@ class Level{
             // on that point we could also use the sigmoid function to calculate the output via f(sum + level.biases[i])
             // also here we only use linear functions, to get more complex we would need to use libraries like tensor flow  
 
-            if(sum > level.biases[i]){
-                //turning it on
-                level.outputs[i] = 1;
-            }else{
-                //turning it off
-                level.outputs[i] = 0;
-            }
+            level.outputs[i] = sum + level.biases[i];
         }
         return level.outputs;
     }
-
 }
+
+try{
+    module.exports = NeuralNetwork;
+} catch (err){}

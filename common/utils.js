@@ -60,6 +60,10 @@ utils.getNearest = (loc, points, k = 1) => {
    return indices.slice(0, k);
 };
 
+utils.lerp = (A,B,t) => {
+   return A+(B-A)*t;
+};
+
 utils.invLerp = (a, b, v) => {
    return (v - a) / (b - a);
 };
