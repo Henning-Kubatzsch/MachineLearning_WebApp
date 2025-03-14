@@ -114,7 +114,7 @@ featureFunctions.inUse = [
    { name: "Height", function: featureFunctions.getHeight },
    { name: "Elongation", function: featureFunctions.getElongation },
    { name: "Roundness", function: featureFunctions.getRoundness},
-   //{ name: "GetComplexity", function: featureFunctions.getComplexity}
+   { name: "GetComplexity", function: featureFunctions.getComplexity}
 ];
 
 if (typeof module !== "undefined") {

@@ -4,7 +4,7 @@ if (typeof utils === "undefined") {
 }
 
 if (typeof NeuralNetwork === "undefined") {
-   NeuralNetwork = require("../netwotk.js");
+   NeuralNetwork = require("../network.js");
 }
 
 class MLP {
@@ -21,6 +21,7 @@ class MLP {
    }
 
    predict(point) {
+      //console.log("point: " + point);
       const output = NeuralNetwork.feedForward(point, this.network);
       const max = Math.max(...output);
       const index = output.indexOf(max);
@@ -30,7 +31,9 @@ class MLP {
 
    fit(samples, tries = 1000){
       let bestNetwork = this.network;
+      //console.log(bestNetwork.levels);
       let bestAccuracy = this.evaluate(samples);
+      
       for(let i = 0; i < tries; i++){
          this.network = new NeuralNetwork(this.neuronCounts);
          const accuracy = this.evaluate(samples);

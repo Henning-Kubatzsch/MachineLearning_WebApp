@@ -17,12 +17,15 @@ const mlp = new MLP(
 );
 
 if(fs.existsSync(constants.MODEL)){
+   console.log("model does exist");
    mlp.load(JSON.parse(
       fs.readFileSync(constants.MODEL)
    ));
 }
 
-mlp.fit(trainingSamples, 5000);
+console.log(mlp.network.levels);
+
+mlp.fit(trainingSamples, 1000);
 
 fs.writeFileSync(constants.MODEL, JSON.stringify(mlp));
 fs.writeFileSync(constants.MODEL_JS, `const model = ${JSON.stringify(mlp)};`);
@@ -63,6 +66,7 @@ for (let x = 0; x < canvas.width; x++) {
          point.push(0);
       }
       const { label } = mlp.predict(point);
+      //console.log("label: " + label);
       const color = utils.styles[label].color;
       ctx.fillStyle = color;
       ctx.fillRect(x, y, 1, 1);
