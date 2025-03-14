@@ -20,7 +20,7 @@ for (let i = 0; i < samples.length; i++) {
 
 const featureNames = featureFunctions.inUse.map((f) => f.name);
 
-console.log("GENERATING SPLITS ...");
+console.log("\nGENERATING SPLITS ...");
 
 const trainingAmount = samples.length * 0.5;
 

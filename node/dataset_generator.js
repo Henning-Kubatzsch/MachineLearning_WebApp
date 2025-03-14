@@ -17,6 +17,8 @@ if (fs.existsSync(constants.DATASET_DIR)) {
    );
    fs.rmdirSync(constants.DATASET_DIR);
 }
+
+// create directories
 fs.mkdirSync(constants.DATASET_DIR);
 fs.mkdirSync(constants.JSON_DIR);
 fs.mkdirSync(constants.IMG_DIR);
@@ -24,8 +26,8 @@ if (!fs.existsSync(constants.MODELS_DIR)) {
    fs.mkdirSync(constants.MODELS_DIR);
 }
 console.log("GENERATING DATASET ...");
-// End of extra section
 
+// generates samples.js samples.json files, image files, paths files
 const fileNames = fs.readdirSync(constants.RAW_DIR);
 const samples = [];
 let id = 1;
@@ -93,7 +95,7 @@ function generateImageFile(outFile, paths) {
    draw.text(ctx, complexity, "blue");
    */
 
-   // following code is generating bounding box when using the vertecies line and the hull when using the hull line
+   // following code is generating bounding box when using the vertecies line and when using the hull line
    
    const{vertices, hull} = geometry.minimumBoundingBox({
       points: paths.flat()
@@ -107,9 +109,7 @@ function generateImageFile(outFile, paths) {
    const color = `rgb(${R},${G},${B})`;   
 
    //draw.path(ctx, [...vertices, vertices[0]], "red");
-   draw.path(ctx, [...hull, hull[0]], color);
-   
-
+   //draw.path(ctx, [...hull, hull[0]], color);
 
    const buffer = canvas.toBuffer("image/png");
    fs.writeFileSync(outFile, buffer);
