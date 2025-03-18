@@ -93,17 +93,20 @@ featureFunctions.getPixels = (paths, size = 400, expand = true) => {
          );
          newPaths.push(newPoints);
       }
-      draw.paths(ctx, newPaths);
+      draw.paths(ctx, newPaths, "black", true);
    }else{
       draw.paths(ctx, paths);
    }   
    const imgData = ctx.getImageData(0, 0, size, size);
+   const nonZeroCount = imgData.data.filter((a) => a!=0).length;
+   console.log("nonZeroCount:", nonZeroCount);
    // here i return every 4th pixel
    return imgData.data.filter((val, index) => index %4 == 3);
 }
 
 featureFunctions.getComplexity = (paths) =>{
    const pixels = featureFunctions.getPixels(paths);
+   console.log("pixels:" + pixels.filter((a) => a != 0).length);
    return pixels.filter((a) => a != 0).length;
 };
 

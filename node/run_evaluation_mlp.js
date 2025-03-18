@@ -23,8 +23,6 @@ if(fs.existsSync(constants.MODEL)){
    ));
 }
 
-console.log(mlp.network.levels);
-
 mlp.fit(trainingSamples, 1000);
 
 fs.writeFileSync(constants.MODEL, JSON.stringify(mlp));

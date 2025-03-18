@@ -165,6 +165,9 @@
             const functions = featureFunctions.inUse.map((f) => f.function);
             // deklare point withour var, const or let makes it a global variable
             point = functions.map((f) => f(paths));
+
+            console.log("point: " + point);
+
             utils.normalizePoints([point], minMax);
             //const { label, nearestSamples } = kNN.predict(point);
             const { label, nearestSamples } = mlp.predict(point);
