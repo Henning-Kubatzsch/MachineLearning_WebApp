@@ -98,8 +98,7 @@ featureFunctions.getPixels = (paths, size = 400, expand = true) => {
       draw.paths(ctx, paths);
    }   
    const imgData = ctx.getImageData(0, 0, size, size);
-   const nonZeroCount = imgData.data.filter((a) => a!=0).length;
-   console.log("nonZeroCount:", nonZeroCount);
+
    // here i return every 4th pixel
    return imgData.data.filter((val, index) => index %4 == 3);
 }
@@ -111,13 +110,19 @@ featureFunctions.getComplexity = (paths) =>{
 };
 
 featureFunctions.inUse = [
+
+   {
+      name: "Pixel Array", function:(paths) => {
+         return featureFunctions.getPixels(paths, 20)
+      }
+   }
+
    //{name:"Path Count",function:featureFunctions.getPathCount},
-   //{name:"Point Count",function:featureFunctions.getPointCount},
-   { name: "Width", function: featureFunctions.getWidth },
-   { name: "Height", function: featureFunctions.getHeight },
-   { name: "Elongation", function: featureFunctions.getElongation },
-   { name: "Roundness", function: featureFunctions.getRoundness},
-   { name: "GetComplexity", function: featureFunctions.getComplexity}
+   //{ name: "Width", function: featureFunctions.getWidth },
+   //{ name: "Height", function: featureFunctions.getHeight },
+   //{ name: "Elongation", function: featureFunctions.getElongation },
+   //{ name: "Roundness", function: featureFunctions.getRoundness},
+   //{ name: "GetComplexity", function: featureFunctions.getComplexity}
 ];
 
 if (typeof module !== "undefined") {
