@@ -23,6 +23,7 @@ class NeuralNetwork{
         }      
         return outputs;
     }
+
     static mutate(network, amount=1){
         network.levels.forEach(level =>{
             for(let i=0; i<level.biases.length; i++){
@@ -90,14 +91,16 @@ class Level{
         for(let i=0; i < level.outputs.length; i++){
             let sum = 0;
             for(let j=0; j< level.inputs.length; j++){
-                sum += level.inputs[j] 
-                * level.weights[j][i]
+                sum += level.inputs[j] * level.weights[j][i]
             }
             // here we use the hyperplane equation
             // on that point we could also use the sigmoid function to calculate the output via f(sum + level.biases[i])
             // also here we only use linear functions, to get more complex we would need to use libraries like tensor flow  
 
-            level.outputs[i] = sum + level.biases[i];
+            //level.outputs[i] = sum + level.biases[i];
+
+            //ACTIVATION FUNCTION (recitified linear unit):
+            level.outputs[i] = Math.tanh(sum + level.biases[i]);
         }
         return level.outputs;
     }

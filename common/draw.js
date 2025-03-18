@@ -68,9 +68,11 @@ draw.paths = (ctx, paths, color = "black", fromF = false) => {
       console.log("lineCap:", ctx.lineCap);
       console.log("lineJoin:", ctx.lineJoin);
       */
+     
       const imgData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
       const countNoneZero  = imgData.data.filter((a) => a != 0).length;
-      console.log("countNoneZero:", countNoneZero);
+      //console.log("countNoneZero:", countNoneZero);
+      
    }
    
 };

@@ -6,7 +6,9 @@ hidden = (10)
 mlp = MLPClassifier(
    hidden, 
    max_iter= 10000, 
-   random_state=1
+   random_state=1,
+    #rectified linear unit is enabled by default -> for having the code fully compatablile with js code we need to adapt the js. network
+   activation='tanh'
 )
 
 X, y = readFeatureFile("../data/dataset/training.csv")
