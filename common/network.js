@@ -75,7 +75,10 @@ class Level{
         for(let i = 0; i < level.inputs.length; i++){
             for(let j = 0; j < level.outputs.length; j++){
                 //get random value for weights between -1 and 1
-                level.weights[i][j] = Math.random()*2 - 1;
+                var test = Math.random()*2 - 1;
+                console.log("random weight: " + test);
+             
+                level.weights[i][j] = test;
             }
         }
         for(let i = 0; i < level.biases.length; i++){

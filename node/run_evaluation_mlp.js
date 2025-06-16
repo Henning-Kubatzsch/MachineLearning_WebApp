@@ -25,6 +25,8 @@ if(fs.existsSync(constants.MODEL)){
 
 mlp.fit(trainingSamples);
 
+console.loog('----------------i am back -----------------');
+
 fs.writeFileSync(constants.MODEL, JSON.stringify(mlp));
 fs.writeFileSync(constants.MODEL_JS, `const model = ${JSON.stringify(mlp)};`);
 
