@@ -40,7 +40,7 @@ pip install -r requirements.txt
 
 ### 1. Generate Dataset
 
-Navigate to the `/node` directory and run one of the following:
+Navigate to the `/node` directory and run following:
 
 
 ```bash
@@ -88,6 +88,7 @@ python mlp.py
 
 #### Using Node.js:
 
+(needs maintenace)
 ```bash
 node run_evaluation_mlp.js
 ```
