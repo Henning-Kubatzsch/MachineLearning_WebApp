@@ -37,9 +37,11 @@ pip install -r requirements.txt
 
 ---
 
-## Usage (from `/node` directory)
 
 ### 1. Generate Dataset
+
+Navigate to the `/node` directory and run one of the following:
+
 
 ```bash
 node dataset_generator.js
